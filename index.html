@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body.ltr {direction: ltr;}
+		body.rtl {direction: rtl;}
+		section {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin-top: 3px;
+		}
+		input {
+			width: 23%;
+			padding-left: 5px;
+		}
+	</style>
+</head>
+<body class="ltr">
+	<button onclick="
+		this.innerText = `Switch to ${document.body.classList[0]}`;
+		document.body.classList.toggle('ltr');
+		document.body.classList.toggle('rtl');
+		">Switch to rtl</button>
+	<section data-row="1">
+		<input data-row="row-0" data-column="cl-0" type="text" value="row-0 cl-0">
+		<input data-row="row-0" data-column="cl-1" type="text" value="row-0 cl-1">
+		<input data-row="row-0" data-column="cl-2" type="text" value="row-0 cl-2">
+		<input data-row="row-0" data-column="cl-3" type="text" value="row-0 cl-3">
+	</section>
+	<section data-row="2">
+		<input data-row="row-1" data-column="cl-0" type="text" value="row-1 cl-0">
+		<input data-row="row-1" data-column="cl-1" type="text" value="row-1 cl-1">
+		<input data-row="row-1" data-column="cl-2" type="text" value="row-1 cl-2">
+		<input data-row="row-1" data-column="cl-3" type="text" value="row-1 cl-3">
+	</section>
+	<section data-row="3">
+		<input data-row="row-2" data-column="cl-0" type="text" value="row-2 cl-0">
+		<input data-row="row-2" data-column="cl-1" type="text" value="row-2 cl-1">
+		<input data-row="row-2" data-column="cl-2" type="text" value="row-2 cl-2">
+		<input data-row="row-2" data-column="cl-3" type="text" value="row-2 cl-3">
+	</section>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
