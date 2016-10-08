@@ -4,6 +4,9 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<style>
+		:root {
+			--columns: 6;
+		}
 		body.ltr {direction: ltr;}
 		body.rtl {direction: rtl;}
 		section {
@@ -13,7 +16,7 @@
 			margin-top: 3px;margin-bottom: 3px;
 		}
 		input {
-			width: 23%;
+			width: calc((100% - 15px * var(--columns)) / var(--columns));
 			padding-left: 5px;
 		}
 	</style>
@@ -24,15 +27,17 @@
 		document.body.classList.toggle('ltr');
 		document.body.classList.toggle('rtl');
 		">Switch to rtl</button>
-	<div class="container"></div>
+	<form class="container" action="post"></form>
 	<button onclick="addRow();">Add row</button>
 	<script type="text/javascript" src="main.js"></script>
 	<template id="template_row">
 		<section data-row="1">
-			<input data-row="" data-column="0" type="text" value="cl-0">
-			<input data-row="" data-column="1" type="text" value="cl-1">
-			<input data-row="" data-column="2" type="text" value="cl-2">
-			<input data-row="" data-column="3" type="text" value="cl-3">
+			<input data-row="" data-column="0" type="text" name="category" placeholder="category">
+			<input data-row="" data-column="1" type="text" name="sub_category" placeholder="sub_category">
+			<input data-row="" data-column="2" type="text" name="title" placeholder="title">
+			<input data-row="" data-column="3" type="text" name="city" placeholder="city">
+			<input data-row="" data-column="4" type="text" name="address" placeholder="address">
+			<input data-row="" data-column="5" type="text" name="phone1" placeholder="phone1">
 		</section>
 	</template>
 </body>

@@ -11,7 +11,6 @@ window.addEventListener('load', e => {
 	});
 })
 
-
 function addData (input, text) {
 	console.time('addData');
 	let [rowInput, columnInput] = [
@@ -50,10 +49,11 @@ function buildGrid () {
 
 function buildRow (i) {
 	let clone = document.importNode(document.getElementById('template_row').content, true);
-	clone.querySelector('section').dataset.row = i;
+	let section = clone.querySelector('section');
+	section.dataset.row = i;
+
 	Array.from(clone.querySelectorAll('section input')).forEach(input => {
 		input.dataset.row = i;
-		input.value = 'row-' + i + ' ' + input.value;
 	});
 	document.querySelector('.container').appendChild(clone);
 }
