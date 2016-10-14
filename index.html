@@ -15,7 +15,7 @@
 			justify-content: space-between;
 			margin-top: 3px;margin-bottom: 3px;
 		}
-		input {
+		input[type=text] {
 			width: calc((100% - 15px * var(--columns)) / var(--columns));
 			padding-left: 5px;
 		}
@@ -27,7 +27,9 @@
 		document.body.classList.toggle('ltr');
 		document.body.classList.toggle('rtl');
 		">Switch to rtl</button>
-	<form class="container" action="post"></form>
+	<form class="container" action="server.php" method="post">
+		<input type="submit" value="Send data to server">
+	</form>
 	<button onclick="addRow();">Add row</button>
 	<script type="text/javascript" src="main.js"></script>
 	<template id="template_row">

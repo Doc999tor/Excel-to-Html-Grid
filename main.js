@@ -44,6 +44,11 @@ function buildGrid () {
 	for (let i = 0; i < rows; i++) {
 		buildRow(i);
 	}
+	let inputHidden = document.createElement('input');
+		inputHidden.type = 'hidden';
+		inputHidden.name = 'rows';
+		inputHidden.value = rows;
+	document.querySelector('.container').insertBefore(inputHidden, document.querySelector('.container input[type=submit]'));
 	console.timeEnd('building');
 }
 
@@ -54,8 +59,9 @@ function buildRow (i) {
 
 	Array.from(clone.querySelectorAll('section input')).forEach(input => {
 		input.dataset.row = i;
+		input.name += `-${i}`;
 	});
-	document.querySelector('.container').appendChild(clone);
+	document.querySelector('.container').insertBefore(clone, document.querySelector('.container input[type=submit]'));
 }
 
 function addRow() {
