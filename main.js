@@ -1,5 +1,10 @@
 window.addEventListener('load', e => {
-	buildGrid();
+	const settings = {
+		rows: 3,
+		querySelector: ".container"
+	}
+	const grid = new Grid(settings);
+	document.getElementById('add_row').addEventListener('click', grid.addRow.bind(grid), false);
 
 	Array.from(document.querySelectorAll('input')).forEach(input => {
 		input.addEventListener('paste', e => {
@@ -36,35 +41,4 @@ function addData (input, text) {
 		});
 	});
 	console.timeEnd('addData');
-}
-
-function buildGrid () {
-	const rows = 3;
-	console.time('building');
-	for (let i = 0; i < rows; i++) {
-		buildRow(i);
-	}
-	let inputHidden = document.createElement('input');
-		inputHidden.type = 'hidden';
-		inputHidden.name = 'rows';
-		inputHidden.value = rows;
-	document.querySelector('.container').insertBefore(inputHidden, document.querySelector('.container input[type=submit]'));
-	console.timeEnd('building');
-}
-
-function buildRow (i) {
-	let clone = document.importNode(document.getElementById('template_row').content, true);
-	let section = clone.querySelector('section');
-	section.dataset.row = i;
-
-	Array.from(clone.querySelectorAll('section input')).forEach(input => {
-		input.dataset.row = i;
-		input.name += `-${i}`;
-	});
-	document.querySelector('.container').insertBefore(clone, document.querySelector('.container input[type=submit]'));
-}
-
-function addRow() {
-	let lastRow = parseInt(Array.from(document.querySelectorAll('.container section')).pop().dataset.row);
-	buildRow(lastRow+1);
 }
