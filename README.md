@@ -14,7 +14,7 @@ By default the grid set to 3 rows so you can or
 
 `Index.html` file has a form so you can send the data from the grid to `server.php`, it will generate SQL `INSERT` query for all the grid. 
 
-Tested for right-to-left direction (Hebrew and Arabic)  
+Tested for right-to-left direction (Hebrew and Arabic), you can switch direction with "Switch to rtl/ltr" button  
 
 ---
 
