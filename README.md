@@ -11,6 +11,7 @@ By default the grid set to 3 rows so you can or
 
 * edit the settings object in `main.js`
 * click on "Add row" button
+* you can add a bunch of rows by entering desired number for rows you want to add and clicking on "Add rows" button
 
 `Index.html` file has a form so you can send the data from the grid to `server.php`, it will generate SQL `INSERT` query for all the grid. 
 
@@ -29,3 +30,7 @@ Tested for right-to-left direction (Hebrew and Arabic), you can switch direction
 
 ### Demo
 You can play with it here: [https://doc999tor.github.io/ExcelToHtmlGrid/](https://doc999tor.github.io/ExcelToHtmlGrid/)
+
+### Future plans
+Creating a jQuery plugin and AngularJS module.  
+React component is far future plan
