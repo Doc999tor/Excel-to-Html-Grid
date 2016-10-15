@@ -39,4 +39,11 @@ class Grid {
 		let lastRow = parseInt(Array.from(document.querySelectorAll(this.settings.querySelector + ' section')).pop().dataset.row);
 		this.buildRow(lastRow+1);
 	}
+	addRows(num) {
+		console.time('adding multiple rows');
+		num = parseInt(num);
+		if (isNaN(num)) {num = 0;}
+		for (let i = 0; i < num; i++) {this.buildRow(i);}
+		console.timeEnd('adding multiple rows');
+	}
 }

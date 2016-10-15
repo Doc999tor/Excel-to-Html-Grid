@@ -19,6 +19,11 @@
 			width: calc((100% - 15px * var(--columns)) / var(--columns));
 			padding-left: 5px;
 		}
+		fieldset {
+			border: none;
+			margin: 0;padding: 0;
+			margin-top: 1rem;
+		}
 	</style>
 </head>
 <body class="ltr">
@@ -31,6 +36,11 @@
 		<input type="submit" value="Send data to server">
 	</form>
 	<button id="add_row">Add row</button>
+	<fieldset id="add_multiple_rows">
+		<legend>Enter a number of rows you want to add</legend>
+		<button>Add rows</button>
+		<input type="number" name="" id="">
+	</fieldset>
 	<script type="text/javascript" src="Grid.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 	<template id="template_row">

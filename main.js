@@ -5,6 +5,8 @@ window.addEventListener('load', e => {
 	}
 	const grid = new Grid(settings);
 	document.getElementById('add_row').addEventListener('click', grid.addRow.bind(grid), false);
+	document.querySelector('#add_multiple_rows button').addEventListener('click', addMultipleRows.bind(grid), false);
+	document.querySelector('#add_multiple_rows input[type=number]').addEventListener('keydown', addMultipleRows.bind(grid), false);
 
 	Array.from(document.querySelectorAll('input')).forEach(input => {
 		input.addEventListener('paste', e => {
@@ -14,7 +16,12 @@ window.addEventListener('load', e => {
 			return false;
 		});
 	});
-})
+});
+
+function addMultipleRows (e) {
+	if (e.type === 'keydown' && e.keyCode !== 13) {return false;}
+	this.addRows(document.querySelector('#add_multiple_rows input[type=number]').value);
+}
 
 function addData (input, text) {
 	console.time('addData');

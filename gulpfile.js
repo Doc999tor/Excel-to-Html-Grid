@@ -11,7 +11,7 @@ var config = {
 };
 
 gulp.task('watch', function () {
-	gulp.watch(['index.html', '*.php', 'main.js', 'style.css']).on('change', reload);
+	gulp.watch(['index.html', '*.php', '*.js']).on('change', reload);
 });
 
 gulp.task('default', ['php', 'watch'], function () {
