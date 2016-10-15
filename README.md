@@ -12,7 +12,9 @@ By default the grid set to 3 rows so you can or
 * edit the settings object in `main.js`
 * click on "Add row" button
 
-`Index.html` file has a form so you can send the data from the grid to `server.php`, it will generate SQL `INSERT` query for all the grid.  
+`Index.html` file has a form so you can send the data from the grid to `server.php`, it will generate SQL `INSERT` query for all the grid. 
+
+Tested for right-to-left direction (Hebrew and Arabic)  
 
 ---
 
