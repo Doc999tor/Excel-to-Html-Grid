@@ -1,11 +1,20 @@
 {
-  "name": "zoominfo-test-task",
+  "name": "ExcelToHtmlGrid",
   "version": "1.0.0",
-  "description": "",
-  "main": "",
+  "description": "Takes copied cells from Excel file and pastes it into HTML inputs grid",
+  "keywords": ["excel","HTML","copy","sql","insert"],
+  "main": "index.html",
   "scripts": {},
-  "author": "Victor",
-  "license": "ISC",
+  "author": {
+    "name": "Victor", 
+    "email": "doc999tor@gmail.com", 
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Doc999tor/ExcelToHtmlGrid.git", 
+  },
+  "homepage": "https://github.com/Doc999tor/ExcelToHtmlGrid", 
   "devDependencies": {
     "browser-sync": "^2.11.2",
     "gulp": "^3.9.1",
