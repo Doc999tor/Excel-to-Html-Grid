@@ -1,49 +1,80 @@
 class Grid {
-	constructor (settings) {
-		this.settings = settings || {
+	constructor (settings, event, eventHandler) {
+		this.settings = Object.assign({
 			rows: 5,
-			querySelector: "form"
-		}
+			formSelector: "form",
+			fields: ["col-1", "col-2", "col-3", "col-4"]
+		}, settings);
+		this.eventHandler = eventHandler;
+		this.event = event;
 		this.buildGrid();
 	}
 
 	buildGrid () {
-		const rows = this.settings.rows;
 		console.time('building');
-		let inputHidden = document.createElement('input');
+		// CSS fits
+		document.documentElement.style.setProperty('--columns', this.settings.fields.length);
+
+		Object.defineProperty(this, 'rowsNum', {
+			get: function () {return this.settings.rows},
+			set: function (val) {
+				this.settings.rows = val;
+				inputHidden.value = val;
+			},
+		});
+		const inputHidden = document.createElement('input');
 			inputHidden.type = 'hidden';
 			inputHidden.name = 'rows';
-			inputHidden.value = rows;
-		document.querySelector(this.settings.querySelector).insertBefore(inputHidden, document.querySelector(this.settings.querySelector + 'input[type=submit]'));
-		for (let i = 0; i < rows; i++) {
-			this.buildRow(i);
+		inputHidden.value = this.rowsNum;
+		document.querySelector(this.settings.formSelector).insertBefore(inputHidden, document.querySelector(this.settings.formSelector + ' input[type=submit]'));
+		this.createRowTemplate();
+		const gridTemplate = document.createDocumentFragment();
+		for (let i = 0; i < this.rowsNum; i++) {
+			gridTemplate.appendChild(this.buildRow(i));
 		}
+		document.querySelector(this.settings.formSelector).appendChild(gridTemplate);
 		console.timeEnd('building');
 	}
 
-	buildRow (i) {
-		let clone = document.importNode(document.getElementById('template_row').content, true);
-		let section = clone.querySelector('section');
-		section.dataset.row = i;
-
-		Array.from(clone.querySelectorAll('section input')).forEach(input => {
-			input.dataset.row = i;
-			input.name += `-${i}`;
+	createRowTemplate() {
+		this.rowTemplate = document.createDocumentFragment();
+		let section = document.createElement('section');
+		section = this.rowTemplate.appendChild(section);
+		this.settings.fields.forEach((field, index) => {
+			const input = document.createElement('input');
+			input.dataset.column = index;
+			input.type = 'text';
+			input.name = field;
+			input.placeholder = field[0].toUpperCase() + field.slice(1).toLowerCase();
+			section.appendChild(input);
 		});
-		document.querySelector(this.settings.querySelector).insertBefore(clone, document.querySelector(this.settings.querySelector + 'input[type=submit]'));
-		document.querySelector(this.settings.querySelector + ' input[name=rows]').value = i+1;
+	}
+
+	buildRow (i) {
+		const clone = this.rowTemplate.cloneNode(true);
+		const section = clone.querySelector('section');
+		section.dataset.row = i;
+		section.querySelectorAll('input').forEach((input) => {
+			input.dataset.row = i;
+			input.name = `${input.name}-${i}`;
+			input.addEventListener(this.event, this.eventHandler);
+		});
+		return clone;
 	}
 
 	addRow() {
-		console.log(this);
-		let lastRow = parseInt(Array.from(document.querySelectorAll(this.settings.querySelector + ' section')).pop().dataset.row);
-		this.buildRow(lastRow+1);
+		document.querySelector(this.settings.formSelector).appendChild(this.buildRow(this.rowsNum));
+		document.querySelector(this.settings.formSelector + ' input[name=rows]').value = this.rowsNum;
+		this.rowsNum++;
 	}
 	addRows(num) {
 		console.time('adding multiple rows');
 		num = parseInt(num);
 		if (isNaN(num)) {num = 0;}
-		for (let i = 0; i < num; i++) {this.buildRow(i);}
+		const template = document.createDocumentFragment();
+		for (let i = this.rowsNum; i < this.rowsNum+num; i++) {template.appendChild(this.buildRow(i));}
+		document.querySelector(this.settings.formSelector).appendChild(template);
+		this.rowsNum += num;
 		console.timeEnd('adding multiple rows');
 	}
 }

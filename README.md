@@ -31,6 +31,8 @@ Tested for right-to-left direction (Hebrew and Arabic), you can switch direction
 ### Demo
 You can play with it here: [https://doc999tor.github.io/ExcelToHtmlGrid/](https://doc999tor.github.io/ExcelToHtmlGrid/)
 
+---
+
 ### Future plans
 Creating a jQuery plugin and AngularJS module.  
 React component is far future plan
