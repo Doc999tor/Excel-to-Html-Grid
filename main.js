@@ -3,6 +3,7 @@ window.addEventListener('load', e => {
 		fields: ["category", "title", "city", "address", "phone"],
 		rows: 3,
 		formSelector: ".container",
+		nameSeparator: "$$",
 	};
 	const grid = new Grid(settings, 'paste', onPasteHandler);
 	document.getElementById('add_row').addEventListener('click', grid.addRow.bind(grid), false);

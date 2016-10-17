@@ -6,11 +6,13 @@ $post = array_slice($_POST, 0);
 
 $rows_num = (int)$post['rows'];
 unset($post['rows']);
+$separator = $post['separator'];
+unset($post['separator']);
 
 $row_length = count($post) / $rows_num;
 
-$categories = array_map(function ($item) {
-	return explode('-', $item)[0];
+$categories = array_map(function ($item) use ($separator) {
+	return explode($separator, $item)[0];
 }, array_keys(array_slice($post, 0, $row_length)));
 
 foreach ($post as $key => $value) {
@@ -25,6 +27,8 @@ for ($i=0; $i < $rows_num; $i++) {
 	if ($values[$i] === '(' . implode(',', array_fill(0, $row_length, '\'\'')) . ')') {
 		unset($values[$i]);
 	}
+}
+if (count($values) === 0) {throw new Exception('there is no data', 1);
 }
 
 $query = 'INSERT into mytable (' . implode(',', $categories) . ') values ' . implode(', ', $values) . ';';
