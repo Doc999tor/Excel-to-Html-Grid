@@ -1,6 +1,8 @@
 # ExcelToHtmlGrid
 Takes copied cells from Excel file and pastes it into HTML inputs grid
 
+---
+
 ### How to use it:
 Open any **Excel** or **Google Sheets** file, copy some cells and paste them into text field in your browser.  
 Values will fill the cells like in the Excel file.  
