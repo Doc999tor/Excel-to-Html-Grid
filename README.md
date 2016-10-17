@@ -2,21 +2,21 @@
 Takes copied cells from Excel file and pastes it into HTML inputs grid
 
 ### How to use it:
-Open any **Excel** or **Google Sheets** file, copy some cells and paste them into text field in your browser.
-Values will fill the cells like in the Excel file.
-If you copied more cells in width or heigth than the browser has, the non fit cells will lose its data, so be carefull.
+Open any **Excel** or **Google Sheets** file, copy some cells and paste them into text field in your browser.  
+Values will fill the cells like in the Excel file.  
+If you copied more cells in width or heigth than the browser has, the non fit cells will lose its data, so be carefull.  
 You can paste the cells wherever you want (not only in the beginning of the grid).
 
 By default the grid set to 3 rows so you can or
 
-* edit the **settings** object in `main.js`
-* click on **"Add row"** button
-* you can add a bunch of rows by entering desired number for rows you want to add and clicking on **"Add rows"** button
+* Edit the **settings** object in `main.js`
+* Click on **"Add row"** button
+* You can add a bunch of rows by entering desired number for rows you want to add and clicking on **"Add rows"** button
 * If you added to many rows, you can **Delete** one or more by pressing on **✖** button
 
-`Index.html` file has a form so you can send the data from the grid to `server.php`, it will generate SQL `INSERT` query for all the grid.
-Empty rows will be cutted off the query.
-Numbers will remain numbers and will not be stringified like the rest of types.
+`Index.html` file has a form so you can send the data from the grid to `server.php`, it will generate SQL `INSERT` query for all the grid.  
+Empty rows will be cutted off the query.  
+Numbers will remain numbers and will not be stringified like the rest of types.  
 
 Tested for right-to-left direction (Hebrew and Arabic), you can switch direction with "Switch to rtl/ltr" button
 
@@ -37,5 +37,5 @@ You can play with it here: [https://doc999tor.github.io/ExcelToHtmlGrid/](https:
 ---
 
 ### Future plans
-Creating a jQuery plugin and AngularJS module.
-React component is far future plan
+Creating a jQuery plugin and AngularJS module.  
+React component is far future plan.  
