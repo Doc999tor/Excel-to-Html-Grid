@@ -4,10 +4,18 @@
 
 $post = array_slice($_POST, 0);
 
+# Helpers
 $rows_num = (int)$post['rows'];
 unset($post['rows']);
 $separator = $post['separator'];
 unset($post['separator']);
+
+# Some custom data
+$hidden_input_names = json_decode($post['hidden_input_names']);
+unset($post['hidden_input_names']);
+for ($i=0; $i < count($hidden_input_names); $i++) {
+	unset($post[$hidden_input_names[$i]]);
+}
 
 $row_length = count($post) / $rows_num;
 

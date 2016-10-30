@@ -1,6 +1,7 @@
 window.addEventListener('load', e => {
 	const settings = {
 		fields: ["category", "title", "city", "address", "phone"],
+		hiddenFields: [{name: "some_hidden_name", value: "some_hidden_value"}],
 		rows: 3,
 		formSelector: ".container",
 		nameSeparator: "$$",

@@ -3,6 +3,7 @@ class Grid {
 		this.settings = Object.assign({
 			rows: 5,
 			formSelector: "form",
+			hiddenFields: [],
 			fields: ["col-1", "col-2", "col-3", "col-4"],
 			nameSeparator: '-'
 		}, settings);
@@ -21,26 +22,32 @@ class Grid {
 			get: function () {return this.settings.rows},
 			set: function (val) {
 				this.settings.rows = val;
-				inputHidden.value = val;
+				inputHiddenRowsNum.value = val;
 			},
 		});
-		const inputHidden = document.createElement('input');
-			inputHidden.type = 'hidden';
-			inputHidden.name = 'rows';
-			inputHidden.value = this.rowsNum;
-		document.querySelector(this.settings.formSelector).insertBefore(inputHidden, document.querySelector(this.settings.formSelector + ' input[type=submit]'));
-		const inputSeparator = document.createElement(
-		'input');
-			inputSeparator.type = 'hidden';
-			inputSeparator.name = 'separator';
-			inputSeparator.value = this.settings.nameSeparator;
-		document.querySelector(this.settings.formSelector).insertBefore(inputSeparator, document.querySelector(this.settings.formSelector + ' input[type=submit]'));
+
+		// Add non-repeating data to the top
+		const nonRepeatFragment = document.createDocumentFragment();
+		const inputHiddenRowsNum = this.createInput('rows', this.rowsNum, 'hidden');
+		nonRepeatFragment.appendChild(inputHiddenRowsNum);
+		const inputSeparator = this.createInput('separator', this.settings.nameSeparator, 'hidden');
+		nonRepeatFragment.appendChild(inputSeparator);
+
+		// Adding static hidden inputs
+		this.settings.hiddenFields.forEach(hidden => nonRepeatFragment.appendChild(this.createInput(hidden.name, hidden.value, 'hidden')));
+		const staticHiddenInputNamesList = this.createInput('hidden_input_names', JSON.stringify(this.settings.hiddenFields.map(f => f.name)), 'hidden');
+		nonRepeatFragment.appendChild(staticHiddenInputNamesList);
+
+		document.querySelector(this.settings.formSelector).appendChild(nonRepeatFragment);
+
 		this.createRowTemplate();
 		const gridTemplate = document.createDocumentFragment();
 		for (let i = 0; i < this.rowsNum; i++) {
 			gridTemplate.appendChild(this.buildRow(i));
 		}
 		document.querySelector(this.settings.formSelector).appendChild(gridTemplate);
+
+		document.querySelector(this.settings.formSelector).appendChild(document.querySelector(this.settings.formSelector + ' input[type=submit]'))
 		console.timeEnd('building');
 	}
 
@@ -49,10 +56,8 @@ class Grid {
 		let section = document.createElement('section');
 		section = this.rowTemplate.appendChild(section);
 		this.settings.fields.forEach((field, index) => {
-			const input = document.createElement('input');
+			const input = this.createInput(field);
 			input.dataset.column = index;
-			input.type = 'text';
-			input.name = field;
 			input.placeholder = field[0].toUpperCase() + field.slice(1).toLowerCase();
 			section.appendChild(input);
 		});
@@ -78,8 +83,16 @@ class Grid {
 		return clone;
 	}
 
+	createInput (name = '', value = '', type = 'text') {
+		const input = document.createElement('input');
+		input.type  = type;
+		input.name  = name;
+		input.value = value;
+		return input;
+	}
+
 	addRow() {
-		document.querySelector(this.settings.formSelector).appendChild(this.buildRow(this.rowsNum));
+		document.querySelector(this.settings.formSelector).insertBefore(this.buildRow(this.rowsNum), document.querySelector(this.settings.formSelector + ' input[type=submit]'));
 		document.querySelector(this.settings.formSelector + ' input[name=rows]').value = this.rowsNum;
 		this.rowsNum++;
 	}
@@ -87,9 +100,10 @@ class Grid {
 		console.time('adding multiple rows');
 		num = parseInt(num);
 		if (isNaN(num)) {num = 0;}
+
 		const template = document.createDocumentFragment();
 		for (let i = this.rowsNum; i < this.rowsNum+num; i++) {template.appendChild(this.buildRow(i));}
-		document.querySelector(this.settings.formSelector).appendChild(template);
+		document.querySelector(this.settings.formSelector).insertBefore(template, document.querySelector(this.settings.formSelector + ' input[type=submit]'));
 		this.rowsNum += num;
 		console.timeEnd('adding multiple rows');
 	}
