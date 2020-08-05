@@ -35,7 +35,7 @@ Tested for right-to-left direction (Hebrew and Arabic), you can switch direction
 ---
 
 ### Demo
-You can play with it here: [https://doc999tor.github.io/ExcelToHtmlGrid/](https://doc999tor.github.io/ExcelToHtmlGrid/)
+You can play with it here: [https://doc999tor.github.io/Excel-to-Html-Grid/](https://doc999tor.github.io/Excel-to-Html-Grid/)
 
 ---
 
